@@ -13,7 +13,7 @@ const initFormData = {
 
 export default function Home() {
   const router = useRouter();
-  const { editEmployeeItem, addEmployee, updateEmployeeItem } = useEmployeeStore((state) => state);
+  const { editEmployeeItem, employees, addEmployee, updateEmployeeItem } = useEmployeeStore((state) => state);
   const [formData, setFormData] = useState<Employee>(editEmployeeItem);
   const [formError, setFormError] = useState(false);
 
@@ -43,9 +43,11 @@ export default function Home() {
       router.push("/employee-list");
     } else {
       const data = {
-        id: Math.floor(Math.random() * 10000),
         ...formData,
+        id: Math.floor(Math.random() * 10000),
       };
+
+      console.log("data", data);
 
       addEmployee(data);
       setFormData(initFormData);
@@ -53,6 +55,8 @@ export default function Home() {
       router.push("/employee-list");
     }
   };
+
+  console.log(employees, editEmployeeItem);
 
   return (
     <>
